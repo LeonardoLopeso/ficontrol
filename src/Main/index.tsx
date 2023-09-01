@@ -4,8 +4,11 @@ import { Header } from "../components/Header";
 import { ButtonsTop } from "../components/ButtonsTop";
 import { ListEntries } from "../components/ListEntries";
 import { formatCurrency } from "../utils/formatCurrency";
+import { useStateHook } from '../hooks/mainHook';
 
 export function Main() {
+  
+  
   return (
     <>
       <Container>

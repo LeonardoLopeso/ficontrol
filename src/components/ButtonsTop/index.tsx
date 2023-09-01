@@ -1,13 +1,20 @@
 import { Text, TouchableOpacity } from "react-native";
 import { BtnOp, Container } from "./styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function ButtonsTop() {
   const [selectedButton, setSelectedButton] = useState('');
 
   const handleButtonPress = (buttonText: string) => {
-    setSelectedButton(buttonText);
+    if(buttonText === "") {
+      return setSelectedButton("Lançamentos");
+    }
+    return setSelectedButton(buttonText)
   }
+
+  useEffect(() => {
+    handleButtonPress("");
+  },[]);
 
   return (
     <Container>
