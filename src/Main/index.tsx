@@ -4,26 +4,50 @@ import { Header } from "../components/Header";
 import { ButtonsTop } from "../components/ButtonsTop";
 import { ListEntries } from "../components/ListEntries";
 import { formatCurrency } from "../utils/formatCurrency";
-import { useStateHook } from '../hooks/mainHook';
+import { useEffect, useState } from "react";
+import { spents } from "../data";
+import { ILancamentos } from "../types";
 
 export function Main() {
-  
+  const [option, setOption] = useState("");
+  const [spent, setSpent] = useState<ILancamentos[]>([]);
+  const [totalSpents, setTotalSpents] = useState(0);
+
+  useEffect(() => {
+    const dataFilter = spents.filter((data) => {
+      if(option === "Lançamentos") {
+        return spents;
+      }
+
+      return data.type === option;
+    });
+    
+    const total = dataFilter.reduce((sum, spent) => sum + spent.valor, 0);
+    setSpent(dataFilter);
+    setTotalSpents(total);
+  },[option])
   
   return (
     <>
       <Container>
         <Header />
 
-        <ButtonsTop />
+        <ButtonsTop
+          opt={option}
+          setOpt={setOption}
+        />
         
         <MonthText>Agosto 2023</MonthText>
 
         <Total>
-          <LabelTotal>Total lançamentos</LabelTotal>
-          <ValueTotal>{formatCurrency(2080)}</ValueTotal>
+          <LabelTotal>Total de {option}</LabelTotal>
+          <ValueTotal>{formatCurrency(totalSpents)}</ValueTotal>
         </Total>
 
-        <ListEntries />
+        <ListEntries 
+          data={spent}
+          label={option}
+        />
 
       </Container>
     </>

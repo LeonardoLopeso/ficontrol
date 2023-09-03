@@ -23,6 +23,8 @@ export const spents: ILancamentos[] = [
     valor: 1200,
     data: "15/03/2023 08:30",
     iconArrowUpOrdown: true,
+    description: "Aqui vai uma descrição deste lançamento",
+    type: "Despesas"
   },
   {
     id: 2,
@@ -30,6 +32,8 @@ export const spents: ILancamentos[] = [
     valor: 250,
     data: "10/03/2023 12:45",
     iconArrowUpOrdown: true,
+    description: "Aqui vai uma descrição deste lançamento",
+    type: "Despesas"
   },
   {
     id: 3,
@@ -37,6 +41,8 @@ export const spents: ILancamentos[] = [
     valor: 100,
     data: "08/03/2023 18:20",
     iconArrowUpOrdown: true,
+    description: "Aqui vai uma descrição deste lançamento",
+    type: "Despesas"
   },
   {
     id: 4,
@@ -44,6 +50,8 @@ export const spents: ILancamentos[] = [
     valor: 80,
     data: "12/03/2023 10:15",
     iconArrowUpOrdown: false,
+    description: "Aqui vai uma descrição deste lançamento",
+    type: "Receitas"
   },
   {
     id: 5,
@@ -51,6 +59,8 @@ export const spents: ILancamentos[] = [
     valor: 60,
     data: "14/03/2023 14:00",
     iconArrowUpOrdown: false,
+    description: "Aqui vai uma descrição deste lançamento",
+    type: "Receitas"
   },
   {
     id: 6,
@@ -58,6 +68,8 @@ export const spents: ILancamentos[] = [
     valor: 90,
     data: "16/03/2023 09:30",
     iconArrowUpOrdown: true,
+    description: "Aqui vai uma descrição deste lançamento",
+    type: "Despesas"
   },
   {
     id: 7,
@@ -65,6 +77,8 @@ export const spents: ILancamentos[] = [
     valor: 50,
     data: "18/03/2023 16:45",
     iconArrowUpOrdown: true,
+    description: "Aqui vai uma descrição deste lançamento",
+    type: "Despesas"
   },
   {
     id: 8,
@@ -72,6 +86,8 @@ export const spents: ILancamentos[] = [
     valor: 70,
     data: "07/03/2023 07:00",
     iconArrowUpOrdown: false,
+    description: "Aqui vai uma descrição deste lançamento",
+    type: "Receitas"
   },
   {
     id: 9,
@@ -79,6 +95,8 @@ export const spents: ILancamentos[] = [
     valor: 150,
     data: "22/03/2023 13:30",
     iconArrowUpOrdown: true,
+    description: "Aqui vai uma descrição deste lançamento",
+    type: "Despesas"
   },
   {
     id: 10,
@@ -86,5 +104,7 @@ export const spents: ILancamentos[] = [
     valor: 30,
     data: "25/03/2023 11:10",
     iconArrowUpOrdown: false,
+    description: "Aqui vai uma descrição deste lançamento",
+    type: "Receitas"
   },
 ];

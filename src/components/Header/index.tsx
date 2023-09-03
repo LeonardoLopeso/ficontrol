@@ -1,4 +1,3 @@
-import { Text } from "react-native";
 import { Container, UserName } from "./styles";
 
 import { AntDesign } from '@expo/vector-icons';

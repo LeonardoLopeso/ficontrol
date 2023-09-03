@@ -4,4 +4,6 @@ export interface ILancamentos {
   valor: number;
   data: string;
   iconArrowUpOrdown: boolean;
+  description: string;
+  type: string;
 }
