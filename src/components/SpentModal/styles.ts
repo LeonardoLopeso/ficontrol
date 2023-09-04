@@ -2,12 +2,17 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  background: #121212;
   padding: 0 8px 8px;
+  background: #121212;
+`;
+
+export const BtnClose = styled.TouchableOpacity`
+  position: absolute;
+  right: 32px;
+  top: 32px;
 `;
 
 export const SpentLabel = styled.View`
-
   margin-bottom: 24px;
 `;
 
@@ -31,7 +36,7 @@ export const BoxDetails = styled.View`
   padding: 20px 18px 0;
 
   border-radius: 9px;
-  background: rgba(255,255,255,.15);
+  background-color: rgba(255,255,255, .04);
 `;
 
 export const Top = styled.View`
@@ -41,6 +46,4 @@ export const Top = styled.View`
   margin-bottom: 24px;
 `;
 
-export const Details = styled.View`
-  margin-top: 24px;
-`;
+export const Details = styled.View``;

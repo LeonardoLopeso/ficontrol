@@ -3,9 +3,16 @@ import styled from "styled-components/native";
 export const Container = styled.View`
   margin: 32px 16px 16px;
   padding: 0 14px 14px;
-  background-color: rgba(255,255,255, .09);
+  background-color: rgba(255,255,255, .04);
   flex: 1;
   border-radius: 9px;
+`;
+
+export const Entrie = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
 `;
 
 export const Spent = styled.TouchableOpacity`

@@ -1,6 +1,6 @@
 import { Modal, Platform, Text } from "react-native";
 import { ILancamentos } from "../../types";
-import { Container, BoxDetails, TotalPrice, LabelDesc, LabelPrice, Top, Details, SpentLabel } from "./styles";
+import { Container, BoxDetails, TotalPrice, LabelDesc, LabelPrice, Top, Details, SpentLabel, BtnClose } from "./styles";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { DetailsSpent } from "../DetailsSpent";
 
@@ -26,8 +26,16 @@ export function SpentModal({ visible, onClose, spent }: SpentProps) {
       onRequestClose={onClose}
     >
       <Container>
+        <BtnClose onPress={onClose}>
+          <AntDesign 
+            name="closesquare" 
+            color='#383838' 
+            size={20}
+          />
+        </BtnClose>
 
         <TotalPrice>
+
           <SpentLabel>
             <LabelDesc>Despesa: </LabelDesc>
             <Text style={{ color:'#FFF', fontSize: 38 }}>{spent.title}</Text>
@@ -38,22 +46,9 @@ export function SpentModal({ visible, onClose, spent }: SpentProps) {
         </TotalPrice>
 
         <BoxDetails>
-          <Top>
-            <Text style={{ fontSize: 32, color:'#fff' }}>Detalhes</Text>
-            <Text 
-              style={{ 
-                fontSize: 18, 
-                color:'rgba(255,255,255, .6)'
-              }}
-
-              onPress={onClose}
-            >
-              <AntDesign name="down" /> voltar
-            </Text>
-          </Top>
-
+          <Text style={{ fontSize: 32, color:'#EEEEEE' }}>Detalhes</Text>
+        
           <Details>
-
             <DetailsSpent 
               title="Data de criação"
               description={spent.data}

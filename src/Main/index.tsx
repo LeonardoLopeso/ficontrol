@@ -37,7 +37,7 @@ export function Main() {
           setOpt={setOption}
         />
         
-        <MonthText>Agosto 2023</MonthText>
+        <MonthText>Setembro 2023</MonthText>
 
         <Total>
           <LabelTotal>Total de {option}</LabelTotal>
