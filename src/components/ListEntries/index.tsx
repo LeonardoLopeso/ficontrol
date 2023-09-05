@@ -9,6 +9,7 @@ import { ILancamentos } from "../../types";
 
 import { AntDesign } from '@expo/vector-icons';
 import { Create } from "../Create";
+import { Input } from "../Input";
 
 interface ListEntriesProps {
   data: ILancamentos[];
@@ -34,15 +35,18 @@ export function ListEntries({ data, label }: ListEntriesProps) {
         </TouchableOpacity>
       </Entrie>
 
+      <Input placeholder="Pesquisasr" />
+
       <FlatList 
         showsVerticalScrollIndicator={false}
         data={data}
         keyExtractor={spent => spent.id.toString()}
         ItemSeparatorComponent={Separator}
+        style={{marginTop: 16}}
         renderItem={({ item: spent }) => (
           <Spent onPress={() => handleOpenModal(spent)}>
             <IconTitle>
-              {spent.iconArrowUpOrdown ? <ArrowUp /> : <ArrowDown />}
+              {spent.iconArrowUpOrdown ? <ArrowDown /> : <ArrowUp />}
 
               <TitleDate>
                 <TitleSpent>{spent.title}</TitleSpent>

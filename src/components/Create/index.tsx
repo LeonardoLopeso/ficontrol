@@ -1,6 +1,9 @@
-import { Modal, Text } from "react-native";
-import { Content, Overlay, BoxTop, Fields, BoxButtons, Button } from "./styles";
+import { Modal, Text, TouchableOpacity } from "react-native";
+import { Content, Overlay, BoxTop, Fields, BoxButtons, Button, TextImport } from "./styles";
 import { Input } from "../Input";
+import { ButtonCustom } from "../ButtonCustom";
+
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 interface CreatProps {
   visible: boolean;
@@ -22,13 +25,37 @@ export function Create({ onClose, visible }: CreatProps) {
           </BoxTop>
 
           <Fields>
-            <Input placeholder="Despesa" />
-            <Input placeholder="R$ 00,00" />
-            <Input placeholder="Descrição" />
+            <Input placeholder="Despesa" border />
+            <Input placeholder="R$ 00,00" border />
+            <Input placeholder="Descrição" border isTextArea />
           </Fields>
 
+          <TextImport>
+            <Text style={{
+              color: "#ACACAC",
+            }}>
+              Se preferir, importe um arquivo CSV &nbsp;
+              <MaterialCommunityIcons 
+                name="information-outline" 
+                size={16} 
+              />
+            </Text>
+            <TouchableOpacity>
+              <Text style={{
+                color: '#EEEEEE',
+                fontSize: 18,
+                marginTop: 8
+              }}>Importar</Text>
+            </TouchableOpacity>
+          </TextImport>
+
           <BoxButtons>
-            {/* <Button title="Salvar" /> */}
+            <ButtonCustom 
+              label="Cancelar" 
+              color="#FFF" 
+              onClose={onClose}
+            />
+            <ButtonCustom label="Salvar" color="#121212" bgColor="#04D361" />
           </BoxButtons>
         </Content>
       </Overlay>

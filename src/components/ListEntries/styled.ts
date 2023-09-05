@@ -12,7 +12,6 @@ export const Entrie = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
 `;
 
 export const Spent = styled.TouchableOpacity`
@@ -23,7 +22,7 @@ export const Spent = styled.TouchableOpacity`
 export const Title = styled.Text`
   color: #fff;
   font-size: 24px;
-  padding: 19px 0 27px;
+  padding: 19px 0 17px;
 `;
 
 export const IconTitle = styled.View`

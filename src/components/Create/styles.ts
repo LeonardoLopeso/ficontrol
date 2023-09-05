@@ -8,6 +8,7 @@ export const Overlay = styled.View`
 export const Content = styled.View`
   width: 100%;
   height: 80%;
+  padding: 0 26px;
   margin-top: auto;
   border-top-right-radius: 9px;
   border-top-left-radius: 9px;
@@ -21,19 +22,25 @@ export const BoxTop = styled.View`
 
 export const Fields = styled.View`
   gap: 16px;
-  padding: 0 26px;
   margin-top: 40px;
 `;
 
+ export const TextImport = styled.View`
+  align-items: flex-end;
+  margin-top: 20px;
+ `;
+
 export const BoxButtons = styled.View`
   flex-direction: row;
+  height: 20%;
+  align-items: flex-end;
   justify-content: flex-end;
-  padding: 0 26px;
+  gap: 32px;
   margin-top: 81px;
 `;
 
 export const Button = styled.Button`
   background: #04D361;
-  width: 95px;
+  width: 195px;
   height: 32px;
 `;
