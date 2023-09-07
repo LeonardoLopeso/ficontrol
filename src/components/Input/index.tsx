@@ -5,9 +5,10 @@ interface InputProps {
   isTextArea?: boolean;
   border?: boolean;
   search?: (value: string) => void;
+  isNumber?: boolean;
 }
 
-export function Input({ placeholder, isTextArea, border, search }: InputProps) {
+export function Input({ placeholder, isTextArea, border, search, isNumber }: InputProps) {
   const style = {
     height: isTextArea ? 90 : 52,
     backgroundColor: 'rgba(0,0,0, .5)',
@@ -26,6 +27,7 @@ export function Input({ placeholder, isTextArea, border, search }: InputProps) {
       multiline={isTextArea ? true : false}
       style={{...style}}
       onChangeText={search}
+      keyboardType={isNumber ? 'decimal-pad' : 'default'}
     />
   )
 }

@@ -2,7 +2,6 @@ import { FlatList, TouchableOpacity } from "react-native";
 import { Container, DateHour, Entrie, IconTitle, Price, Separator, Spent, Title, TitleDate, TitleSpent } from "./styled";
 import { ArrowUp } from "../Icons/ArrowUP";
 import { ArrowDown } from "../Icons/ArrowDown";
-import { formatCurrency } from "../../utils/formatCurrency";
 import { SpentModal } from "../SpentModal";
 import { useState } from "react";
 import { ILancamentos } from "../../types";
@@ -10,6 +9,7 @@ import { ILancamentos } from "../../types";
 import { AntDesign } from '@expo/vector-icons';
 import { Create } from "../Create";
 import { Input } from "../Input";
+import { formatCurrency } from "../../utils/helpers";
 
 interface ListEntriesProps {
   data: ILancamentos[];

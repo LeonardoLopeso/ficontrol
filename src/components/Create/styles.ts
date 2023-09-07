@@ -17,7 +17,7 @@ export const Content = styled.View`
 
 export const BoxTop = styled.View`
   align-items: center;
-  padding-top: 64px;
+  padding-top: 44px;
 `;
 
 export const Fields = styled.View`
@@ -36,7 +36,6 @@ export const BoxButtons = styled.View`
   align-items: flex-end;
   justify-content: flex-end;
   gap: 32px;
-  margin-top: 81px;
 `;
 
 export const Button = styled.Button`

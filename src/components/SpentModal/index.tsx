@@ -1,10 +1,10 @@
-import { Modal, Platform, Text } from "react-native";
+import { Modal, Text } from "react-native";
 import { ILancamentos } from "../../types";
 import { Container, BoxDetails, TotalPrice, LabelDesc, LabelPrice, Top, Details, SpentLabel, BtnClose } from "./styles";
-import { formatCurrency } from "../../utils/formatCurrency";
 import { DetailsSpent } from "../DetailsSpent";
 
-import { AntDesign, Octicons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+import { formatCurrency } from "../../utils/helpers";
 
 interface SpentProps {
   visible: boolean;

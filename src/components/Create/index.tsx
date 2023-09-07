@@ -4,6 +4,7 @@ import { Input } from "../Input";
 import { ButtonCustom } from "../ButtonCustom";
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import DateInput from "../DateInput";
 
 interface CreatProps {
   visible: boolean;
@@ -12,12 +13,14 @@ interface CreatProps {
 }
 
 export function Create({ onClose, visible, plceholder }: CreatProps) {
+
   return (
     <Modal
       visible={visible}
       animationType="slide"
       onRequestClose={onClose}
       transparent
+      style={{ zIndex: 10 }}
     >
       <Overlay>
         <Content>
@@ -31,7 +34,8 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
               no plural foi utilizado a func slice para remover o último caractere "s"
             */}
             <Input placeholder={plceholder.slice(0, plceholder.length - 1)} border />
-            <Input placeholder="R$ 00,00" border />
+            <Input isNumber={true} placeholder="R$ 00,00" border />
+            <DateInput />
             <Input placeholder="Descrição" border isTextArea />
           </Fields>
 

@@ -1,12 +1,11 @@
-import { Text } from "react-native";
 import { Container, LabelTotal, MonthText, Total, ValueTotal } from "./styles";
 import { Header } from "../components/Header";
 import { ButtonsTop } from "../components/ButtonsTop";
 import { ListEntries } from "../components/ListEntries";
-import { formatCurrency } from "../utils/formatCurrency";
 import { useEffect, useState } from "react";
 import { spents } from "../data";
 import { ILancamentos } from "../types";
+import { formatCurrency } from "../utils/helpers";
 
 export function Main() {
   const [option, setOption] = useState("");
