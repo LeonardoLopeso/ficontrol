@@ -4,7 +4,7 @@ interface InputProps {
   placeholder: string;
   isTextArea?: boolean;
   border?: boolean;
-  search: (value: string) => void;
+  search?: (value: string) => void;
 }
 
 export function Input({ placeholder, isTextArea, border, search }: InputProps) {
@@ -22,6 +22,7 @@ export function Input({ placeholder, isTextArea, border, search }: InputProps) {
   return (
     <TextInput
       placeholder={placeholder}
+      placeholderTextColor="#777"
       multiline={isTextArea ? true : false}
       style={{...style}}
       onChangeText={search}

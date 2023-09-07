@@ -36,7 +36,7 @@ export function ListEntries({ data, label, search }: ListEntriesProps) {
         </TouchableOpacity>
       </Entrie>
 
-      <Input placeholder="Pesquisasr" search={search} />
+      <Input placeholder="Pesquisar" search={search} />
 
       <FlatList 
         showsVerticalScrollIndicator={false}
@@ -69,6 +69,7 @@ export function ListEntries({ data, label, search }: ListEntriesProps) {
       <Create 
         visible={isModalCreateVisible}
         onClose={() => setIsModalCreateVisible(false)}
+        plceholder={label}
       />
     </Container>
   )

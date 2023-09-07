@@ -7,10 +7,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 interface CreatProps {
   visible: boolean;
+  plceholder: string;
   onClose: () => void;
 }
 
-export function Create({ onClose, visible }: CreatProps) {
+export function Create({ onClose, visible, plceholder }: CreatProps) {
   return (
     <Modal
       visible={visible}
@@ -25,7 +26,11 @@ export function Create({ onClose, visible }: CreatProps) {
           </BoxTop>
 
           <Fields>
-            <Input placeholder="Despesa" border />
+            {/* Aplicando o placeholder dinamicamente.
+              A variável plceholder pega o texto do botão de opção do header e por vir
+              no plural foi utilizado a func slice para remover o último caractere "s"
+            */}
+            <Input placeholder={plceholder.slice(0, plceholder.length - 1)} border />
             <Input placeholder="R$ 00,00" border />
             <Input placeholder="Descrição" border isTextArea />
           </Fields>
