@@ -4,9 +4,10 @@ interface InputProps {
   placeholder: string;
   isTextArea?: boolean;
   border?: boolean;
+  search: (value: string) => void;
 }
 
-export function Input({ placeholder, isTextArea, border }: InputProps) {
+export function Input({ placeholder, isTextArea, border, search }: InputProps) {
   const style = {
     height: isTextArea ? 90 : 52,
     backgroundColor: 'rgba(0,0,0, .5)',
@@ -23,6 +24,7 @@ export function Input({ placeholder, isTextArea, border }: InputProps) {
       placeholder={placeholder}
       multiline={isTextArea ? true : false}
       style={{...style}}
+      onChangeText={search}
     />
   )
 }

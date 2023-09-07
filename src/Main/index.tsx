@@ -12,20 +12,30 @@ export function Main() {
   const [option, setOption] = useState("");
   const [spent, setSpent] = useState<ILancamentos[]>([]);
   const [totalSpents, setTotalSpents] = useState(0);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
+    // Setando as opções do menu
+    // Por padrão será selecionado os lançamentos
     const dataFilter = spents.filter((data) => {
       if(option === "Lançamentos") {
         return spents;
       }
-
       return data.type === option;
     });
     
+    // Valor total dos lançamento, receitas e despesas
     const total = dataFilter.reduce((sum, spent) => sum + spent.valor, 0);
     setSpent(dataFilter);
     setTotalSpents(total);
-  },[option])
+
+    // Filtrando pesquisa
+    if(search !== "") {
+      setSpent(dataFilter.filter(data => {
+        return data.title.includes(search)
+      }));
+    }
+  },[option, search])
   
   return (
     <>
@@ -47,6 +57,7 @@ export function Main() {
         <ListEntries 
           data={spent}
           label={option}
+          search={setSearch}
         />
 
       </Container>

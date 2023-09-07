@@ -14,9 +14,10 @@ import { Input } from "../Input";
 interface ListEntriesProps {
   data: ILancamentos[];
   label: string;
+  search: (value: string) => void;
 }
 
-export function ListEntries({ data, label }: ListEntriesProps) {
+export function ListEntries({ data, label, search }: ListEntriesProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalCreateVisible, setIsModalCreateVisible] = useState(false);
   const [selectedSpent, setSelectedSpent] = useState<null | ILancamentos>(null);
@@ -35,7 +36,7 @@ export function ListEntries({ data, label }: ListEntriesProps) {
         </TouchableOpacity>
       </Entrie>
 
-      <Input placeholder="Pesquisasr" />
+      <Input placeholder="Pesquisasr" search={search} />
 
       <FlatList 
         showsVerticalScrollIndicator={false}
