@@ -31,7 +31,11 @@ LocaleConfig.locales['pt-BR'] = {
 
 LocaleConfig.defaultLocale = 'pt-BR';
 
-const DateInput = () => {
+interface IDateInput {
+  onChange: (value: any) => void;
+}
+
+const DateInput = ({ onChange }: IDateInput) => {
   const [selected, setSelected] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -63,6 +67,7 @@ const DateInput = () => {
             onDayPress={day => {
               setSelected(formatarDateBr(day.dateString));
               setIsOpen(false)
+              onChange(formatarDateBr(day.dateString))
             }}
             markedDates={{
               [selected]: {selected: true, disableTouchEvent: true}

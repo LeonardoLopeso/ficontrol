@@ -1,5 +1,4 @@
 export const formatarDateBr = (data: string) => {
-  console.log(data)
   if (!data) {
     // Se nenhum valor for fornecido, obtenha a data atual
     const dataAtual = new Date();

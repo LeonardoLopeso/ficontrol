@@ -57,6 +57,7 @@ export function Main() {
           data={spent}
           label={option}
           search={setSearch}
+          setData={setSpent}
         />
 
       </Container>
