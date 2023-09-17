@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 export function Header() {
   return (
     <Container>
-      <AntDesign name="user" size={20} color="white" />
+      <AntDesign name="user" size={18} color="white" />
       
       <UserName>Leonardo Lopes</UserName>
     </Container>

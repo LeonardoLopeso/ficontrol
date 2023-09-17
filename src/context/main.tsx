@@ -1,81 +1,94 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { ILancamentos } from '../types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface SpentContextData {
+  option: string;
+  search: string;
   spent: ILancamentos[];
   totalSpents: number;
-  addNewSpent: (data: ILancamentos) => void;
-  removeSpent: (id: number) => void;
+  setSearch: (value: string) => void;
+  setOption: (value: string) => void;
   setTotalSpents: (value: number) => void;
+  setSpent: (value: ILancamentos[]) => void;
+  getData: () => void;
+  removeSpent: (id: number) => void;
+  closeModalAlert: boolean;
+  setCloseModalAlert: (value: boolean) => void;
 }
 
 const SpentContext = createContext<SpentContextData>({} as SpentContextData);
 
 const MainProvider = ({ children }: any) => {
   const [spent, setSpent] = useState<ILancamentos[]>([]);
-  const [totalSpents, setTotalSpents] = useState(0);
-  const [search, setSearch] = useState("");
-  const [option, setOption] = useState("");
+  const [totalSpents, setTotalSpents] = useState<number>(0);
+  const [search, setSearch] = useState<string>("");
+  const [option, setOption] = useState<string>("Lançamentos");
+
+  const [closeModalAlert, setCloseModalAlert] = useState(false);
+
+  const getData = async () => {
+    try {
+      const jsonData = await AsyncStorage.getItem('spentData');
+      jsonData !== null ? setSpent(JSON.parse(jsonData)) : setSpent([]);
+
+    } catch (error) {
+      console.error('Erro ao recuperar os dados: ', error)
+    }
+  }
 
   useEffect(() => {
-    // Setando as opções do menu
-    // Por padrão será selecionado os lançamentos
-    const dataFilter = spent.filter((data) => {
-      if(option === "Lançamentos") {
-        return spent;
+    getData();
+  },[]);
+
+  const removeSpent = async (id: number) => {
+    try {
+      const storeSpent = await AsyncStorage.getItem('spentData');
+  
+      let updateSpentList: ILancamentos[] = [];
+  
+      if (storeSpent !== null) {
+        const storeData = JSON.parse(storeSpent);
+
+        if (Array.isArray(storeData)) {
+          updateSpentList = storeData.filter(data => data.id !== id);
+        }
       }
-      return data.type === option;
-    });
-    
-    // Valor total dos lançamento, receitas e despesas
-    const total = dataFilter.reduce((sum, spent) => sum + spent.valor, 0);
-    setSpent(dataFilter);
-    setTotalSpents(total);
+  
+      await AsyncStorage.setItem('spentData', JSON.stringify(updateSpentList));
 
-    // Filtrando pesquisa
-    if(search !== "") {
-      setSpent(dataFilter.filter(data => {
-        return data.title.includes(search)
-      }));
+      getData();
+      
+    } catch (error) {
+      console.error('Um erro ocorreu: ', error)
     }
-  },[option, search])
+  }
 
-  const addNewSpent = (data: ILancamentos) => {
-    console.log('addNewSpent');
-    const copySpent = [...spent];
-
-    const item = copySpent.find(prod => prod.id === data.id);
-
-    if(!item) {
-      copySpent.push(data);
+  const removeData = async () => {
+    try {
+      await AsyncStorage.removeItem('spentData')
+      
+    } catch (error) {
+      console.error('Um erro ocorreu: ', error)
     }
-    setSpent(copySpent);
-  };
+  }
 
-  const removeSpent = useCallback((id: number) => {
-    // code here...
-  }, [spent]);
-
-
-  const total = spent.reduce((total, element) => {
-    // if (element.prod?.price !== undefined) {
-    //   return total += (element.qtd * element.prod.price);
-    // } else { 
-    //   return total
-    // }
-    const t = total;
-    const e = element;
-    return 0;
-  }, 0);
 
   return (
     <SpentContext.Provider
       value={{
-        addNewSpent,
-        removeSpent,
+        search,
+        option,
         spent,
         totalSpents,
-        setTotalSpents
+        closeModalAlert,
+        setCloseModalAlert,
+        setSearch,
+        setOption,
+        setTotalSpents,
+        setSpent,
+        getData,
+        removeSpent
       }}
     >
       {children}

@@ -21,7 +21,7 @@ export const Total = styled.View`
 `;
 
 export const LabelTotal = styled.Text`
-  color: #EBEBEB;
+  color: #777;
 `;
 
 export const ValueTotal = styled.Text`

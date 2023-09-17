@@ -4,7 +4,7 @@ export const Container = styled.View`
   flex: 1;
   padding: 80% 4%;
   height: 100%;
-  background-color: rgba(0,0,0, .3);
+  background-color: rgba(0,0,0, .4);
 `;
 
 export const TextInputFake = styled.TouchableOpacity`

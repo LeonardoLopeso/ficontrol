@@ -39,6 +39,26 @@ export const BoxDetails = styled.View`
   background-color: rgba(255,255,255, .04);
 `;
 
+export const BoxDeleteSpent = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 12px;
+  padding-bottom: 86px;
+`;
+
+interface ITouchableProps {
+  isEdit?: boolean;
+}
+
+export const Delete = styled.TouchableOpacity<ITouchableProps>`
+  padding: 12px 52px;
+  border-radius: 4px;
+  border: 1px solid ${({ isEdit }: any) => isEdit ? '#444' : 'transparent'};
+  background-color: ${({ isEdit }: any) => isEdit ? '#03DAC6' : 'transparent'};
+`;
+
 export const Top = styled.View`
   flex-direction: row;
   justify-content: space-between;

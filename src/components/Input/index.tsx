@@ -8,7 +8,14 @@ interface InputProps {
   isNumber?: boolean;
 }
 
-export function Input({ placeholder, isTextArea, border, onChange, isNumber }: InputProps) {
+export function Input({ 
+  placeholder,
+  isTextArea,
+  border,
+  onChange,
+  isNumber,
+}: InputProps) {
+
   const style = {
     height: isTextArea ? 90 : 52,
     backgroundColor: 'rgba(0,0,0, .5)',

@@ -62,7 +62,7 @@ const DateInput = ({ onChange }: IDateInput) => {
           <Container>
           <Calendar
             style={{
-              borderRadius:8,
+              borderRadius:8
             }}
             onDayPress={day => {
               setSelected(formatarDateBr(day.dateString));

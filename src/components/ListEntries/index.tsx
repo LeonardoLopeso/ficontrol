@@ -1,32 +1,61 @@
 import { FlatList, TouchableOpacity } from "react-native";
-import { Container, DateHour, Entrie, IconTitle, Price, Separator, Spent, Title, TitleDate, TitleSpent } from "./styled";
+
+import { Container, 
+  DateHour, 
+  Entrie, 
+  IconTitle, 
+  Price, 
+  Separator, 
+  Spent, 
+  Title, 
+  TitleDate, 
+  TitleSpent 
+} from "./styled";
+
 import { ArrowUp } from "../Icons/ArrowUP";
 import { ArrowDown } from "../Icons/ArrowDown";
 import { SpentModal } from "../SpentModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ILancamentos } from "../../types";
 
 import { AntDesign } from '@expo/vector-icons';
 import { Create } from "../Create";
 import { Input } from "../Input";
 import { formatCurrency } from "../../utils/helpers";
+import { useSpent } from "../../context/main";
 
 interface ListEntriesProps {
-  data: ILancamentos[];
   label: string;
-  search: (value: string) => void;
-  setData: (value: ILancamentos[]) => void;
 }
 
-export function ListEntries({ data, label, search, setData }: ListEntriesProps) {
+export function ListEntries({ label }: ListEntriesProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalCreateVisible, setIsModalCreateVisible] = useState(false);
   const [selectedSpent, setSelectedSpent] = useState<null | ILancamentos>(null);
+  const [spentFiltered, setSpentFiltered] = useState<ILancamentos[]>([]);
+  const { setSearch, spent, option, setTotalSpents, search, setSpent } = useSpent();
 
   function handleOpenModal(spent: ILancamentos) {
     setIsModalVisible(true);
     setSelectedSpent(spent);
   }
+
+  useEffect(() => {
+    const dataFiltered = spent.filter(data => option === 'Lançamentos' ? spent : data.type === option);
+
+    // Valor total dos lançamento, receitas e despesas
+    const total = dataFiltered.reduce((sum, spent) => sum + Number(spent.valor), 0);
+    
+    setSpentFiltered(dataFiltered)
+    setTotalSpents(total);
+    
+    if(search) {
+      setSpentFiltered(dataFiltered.filter(data => {
+        return data.title.includes(search)
+      }));
+    }
+
+  },[option, spent, search])
 
   return(
     <Container>
@@ -37,11 +66,11 @@ export function ListEntries({ data, label, search, setData }: ListEntriesProps) 
         </TouchableOpacity>
       </Entrie>
 
-      <Input placeholder="Pesquisar" onChange={search} />
+      <Input placeholder="Pesquisar" onChange={setSearch} />
 
       <FlatList 
         showsVerticalScrollIndicator={false}
-        data={data}
+        data={spentFiltered}
         keyExtractor={spent => spent.id.toString()}
         ItemSeparatorComponent={Separator}
         style={{marginTop: 16}}

@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Modal, Text, TouchableOpacity } from "react-native";
-import { Content, Overlay, BoxTop, Fields, BoxButtons, Button, TextImport } from "./styles";
+import { 
+  Content, 
+  Overlay, 
+  BoxTop, 
+  Fields, 
+  BoxButtons, 
+  TextImport, 
+  RevenueExpense, 
+  ButtonReveneuExpense 
+} from "./styles";
+
 import { Input } from "../Input";
 import { ButtonCustom } from "../ButtonCustom";
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import DateInput from "../DateInput";
-import { useSpent } from "../../context/main";
 import { ILancamentos } from "../../types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useSpent } from "../../context/main";
+import { AlertModal } from "../AlertModal";
 
 interface CreatProps {
   visible: boolean;
@@ -17,43 +29,80 @@ interface CreatProps {
 }
 
 export function Create({ onClose, visible, plceholder }: CreatProps) {
-  const { addNewSpent } = useSpent();
+  const { getData } = useSpent();
+  const [lancamento, setLancamento] = useState<string>('');
+  const [value, setValue] = useState<number | null>(null);
+  const [date, setDate] = useState<string | null>(null);
+  const [desc, setDesc] = useState<string | null>(null);
+  const [isCheck, setIsCheck] = useState(0);
 
-  const [lancamento, setLancamento] = useState();
-  const [value, setValue] = useState();
-  const [date, setDate] = useState();
-  const [desc, setDesc] = useState();
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [msgAlert, setMsgAlert] = useState<string>("");
+  const [alertOk, setAlertOk] = useState<boolean>(false);
 
-  // id: number;
-  // title: string;
-  // valor: number;
-  // data: string;
-  // iconArrowUpOrdown: boolean;
-  // description: string;
-  // type: string;
-
-  function handleNewSpent(data: ILancamentos) {
-    if(!lancamento || !value || !date || !desc) {
-      return {}
+  const saveDate = useCallback(async () => {
+    if (!lancamento || !value || !date || !desc || isCheck === 0) {
+      setMsgAlert("Atenção! Preencha todos os campos.");
+      setIsOpenModal(true);
+      setAlertOk(false);
+      return;
     }
-    
-    const newSpent = {
-      id: 345,
-      title: lancamento,
-      valor: value,
-      data: date,
-      description: desc,
-      type: 'Despesas',
-      iconArrowUpOrdown: true,
-    }
+  
+    try {
+      const expenseData: ILancamentos = {
+        id: Math.floor(Math.random() * 1000),
+        title: lancamento,
+        valor: value,
+        data: date,
+        iconArrowUpOrdown: isCheck === 1 ? false : true,
+        description: desc,
+        type: isCheck === 1 ? 'Receitas' : 'Despesas',
+      };
+  
+      const storeSpent = await AsyncStorage.getItem('spentData');
+  
+      let updateSpentList: ILancamentos[] = [];
+  
+      if (storeSpent !== null) {
+        const storeData = JSON.parse(storeSpent);
 
-    addNewSpent(newSpent)
-  }
+        if (Array.isArray(storeData)) {
+          updateSpentList = storeData;
+        }
+      }
+  
+      updateSpentList.push(expenseData);
+  
+      await AsyncStorage.setItem('spentData', JSON.stringify(updateSpentList));
+      
+      setLancamento('');
+      setValue(null);
+      setDate('');
+      setDesc('');
+      setIsCheck(0);
+
+      getData();
+
+      setIsOpenModal(true);
+      setAlertOk(true);
+      setMsgAlert("Lançamento criado com sucesso!");
+
+    } catch (error) {
+      console.error('Erro ao salvar lançamento', error);
+    }
+  }, [lancamento, value, date, isCheck, desc]);
+
+  useEffect(() => {
+    if(!isOpenModal && alertOk) {
+      onClose();
+    }
+  },[isOpenModal, alertOk])
+  
 
   return (
     <Modal
       visible={visible}
-      animationType="slide"
+      animationType="fade"
       onRequestClose={onClose}
       transparent
       style={{ zIndex: 10 }}
@@ -64,13 +113,31 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
             <Text style={{ fontSize: 26, color:'#eeeeee' }}>Novo lançamento</Text>
           </BoxTop>
 
+          
           <Fields>
             {/* Aplicando o placeholder dinamicamente.
               A variável plceholder pega o texto do botão de opção do header e por vir
               no plural foi utilizado a func slice para remover o último caractere "s"
             */}
+
+            <RevenueExpense>
+              <ButtonReveneuExpense 
+                reveOrExpen
+                onPress={() => setIsCheck(1)}
+                check={isCheck === 2 && true}
+              >
+                <Text>Receita</Text>
+              </ButtonReveneuExpense>
+              <ButtonReveneuExpense
+                onPress={() => setIsCheck(2)}
+                check={isCheck === 1 && true}
+              >
+                <Text>Despesa</Text>
+              </ButtonReveneuExpense>
+            </RevenueExpense>
+
             <Input 
-              placeholder={plceholder.slice(0, plceholder.length - 1)} 
+              placeholder="Título do lançamento" 
               onChange={setLancamento}
               border 
             />
@@ -114,15 +181,23 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
             <ButtonCustom 
               label="Cancelar" 
               color="#FFF" 
-              onClose={onClose}
+              onAction={onClose}
             />
             <ButtonCustom 
               label="Salvar" 
               color="#121212" 
               bgColor="#04D361" 
+              onAction={saveDate}
             />
           </BoxButtons>
         </Content>
+        
+        <AlertModal 
+          visible={isOpenModal}
+          isOk={alertOk}
+          label={msgAlert}
+          onClose={() => setIsOpenModal(false)}
+        />
       </Overlay>
     </Modal>
   )

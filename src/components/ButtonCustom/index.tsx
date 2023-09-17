@@ -4,12 +4,12 @@ import { Container, Label } from "./styles";
   label: string;
   bgColor?: string;
   color: string;
-  onClose?: () => void;
+  onAction?: () => void;
  }
 
-export function ButtonCustom({ label, bgColor, color, onClose }: ButtonProps) {
+export function ButtonCustom({ label, bgColor, color, onAction }: ButtonProps) {
   return (
-    <Container onPress={onClose}
+    <Container onPress={onAction}
       style={{
         backgroundColor: bgColor ? bgColor : 'transparent'
       }}

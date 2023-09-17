@@ -7,11 +7,11 @@ export const OptionButtons = [
   },
   {
     id: 2,
-    label: "Despesas"
+    label: "Despesa"
   },
   {
     id: 3,
-    label: "Receitas"
+    label: "Receita"
   },
 ];
 

@@ -22,3 +22,7 @@ export const formatCurrency = (value: number) => {
     { style: 'currency', currency: 'BRL' }
   ).format(value);
 }
+
+export const removeLastLetter = (letter: string) => {
+  return letter.toString().slice(0, -1);
+}

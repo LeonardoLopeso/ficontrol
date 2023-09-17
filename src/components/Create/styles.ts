@@ -17,7 +17,28 @@ export const Content = styled.View`
 
 export const BoxTop = styled.View`
   align-items: center;
-  padding-top: 44px;
+  padding-top: 24px;
+`;
+
+export const RevenueExpense = styled.View`
+  gap: 16px;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+interface IButtonRE {
+  reveOrExpen: boolean;
+  check: boolean;
+}
+
+export const ButtonReveneuExpense = styled.TouchableOpacity<IButtonRE>`
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 46px;
+  border-radius: 8px;
+  background-color: ${({ reveOrExpen }: any) => reveOrExpen ? '#03DAC6' : '#FF7755'};
+  opacity: ${({ check }: any) => check ? 0.6 : 1};
 `;
 
 export const Fields = styled.View`
@@ -27,15 +48,15 @@ export const Fields = styled.View`
 
  export const TextImport = styled.View`
   align-items: flex-end;
-  margin-top: 20px;
+  margin-top: 10px;
  `;
 
 export const BoxButtons = styled.View`
   flex-direction: row;
-  height: 20%;
-  align-items: flex-end;
   justify-content: flex-end;
   gap: 32px;
+  height: 20%;
+  margin-top: auto;
 `;
 
 export const Button = styled.Button`
