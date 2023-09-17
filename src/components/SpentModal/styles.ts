@@ -55,8 +55,9 @@ interface ITouchableProps {
 export const Delete = styled.TouchableOpacity<ITouchableProps>`
   padding: 12px 52px;
   border-radius: 4px;
-  border: 1px solid ${({ isEdit }: any) => isEdit ? '#444' : 'transparent'};
-  background-color: ${({ isEdit }: any) => isEdit ? '#03DAC6' : 'transparent'};
+  border: 1px solid #444;
+  background-color: ${({ isEdit }: any) => isEdit ? '#03DAC6' : '#FF7755'};
+  opacity: ${({ isEdit }: any) => isEdit ? '.4' : '1'};
 `;
 
 export const Top = styled.View`

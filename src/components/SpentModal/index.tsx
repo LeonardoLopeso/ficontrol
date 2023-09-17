@@ -1,12 +1,23 @@
+import { useState } from "react";
 import { Modal, Text } from "react-native";
 import { ILancamentos } from "../../types";
-import { Container, BoxDetails, TotalPrice, LabelDesc, LabelPrice, Top, Details, SpentLabel, BtnClose, BoxDeleteSpent, Delete } from "./styles";
+import { 
+  Container, 
+  BoxDetails, 
+  TotalPrice, 
+  LabelDesc, 
+  LabelPrice, 
+  Details, 
+  SpentLabel, 
+  BtnClose, 
+  BoxDeleteSpent, 
+  Delete 
+} from "./styles";
 import { DetailsSpent } from "../DetailsSpent";
 
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { formatCurrency, removeLastLetter } from "../../utils/helpers";
 import { AlertModal } from "../AlertModal";
-import { useState } from "react";
 import { useSpent } from "../../context/main";
 
 interface SpentProps {
@@ -16,7 +27,6 @@ interface SpentProps {
 }
 
 export function SpentModal({ visible, onClose, spent }: SpentProps) {
-  const [isOpenModal, setIsOpenModal] = useState(false);
   const [msgAlert, setMsgAlert] = useState('');
   const { removeSpent, closeModalAlert, setCloseModalAlert } = useSpent();
 
@@ -85,12 +95,14 @@ export function SpentModal({ visible, onClose, spent }: SpentProps) {
             <Delete onPress={handleDelete}>
               <Text 
                 style={{ 
-                  fontSize:16, 
-                  color:'#FF7755' 
+                  fontSize:18,  
                 }}>Excluir</Text>
             </Delete>
             <Delete isEdit>
-              <Text style={{ fontSize:16 }}>Editar</Text>
+              <Text 
+                style={{ 
+                  fontSize:18 
+                }}>Editar</Text>
             </Delete>
           </BoxDeleteSpent>
         </BoxDetails>

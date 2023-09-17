@@ -14,6 +14,22 @@ export const Entrie = styled.View`
   align-items: center;
 `;
 
+export const InputSearch = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const SpentVoid = styled.View`
+  margin-top: 64px;
+  gap: 16px;
+`;
+
+export const BoxImage = styled.View`
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Spent = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;

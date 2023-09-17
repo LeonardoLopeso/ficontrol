@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { Modal, Text, TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView, Modal, Text, TouchableOpacity } from "react-native";
 import { 
   Content, 
   Overlay, 
@@ -102,7 +102,7 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
   return (
     <Modal
       visible={visible}
-      animationType="fade"
+      animationType="slide"
       onRequestClose={onClose}
       transparent
       style={{ zIndex: 10 }}
@@ -177,19 +177,23 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
             </TouchableOpacity>
           </TextImport>
 
-          <BoxButtons>
-            <ButtonCustom 
-              label="Cancelar" 
-              color="#FFF" 
-              onAction={onClose}
-            />
-            <ButtonCustom 
-              label="Salvar" 
-              color="#121212" 
-              bgColor="#04D361" 
-              onAction={saveDate}
-            />
-          </BoxButtons>
+          <KeyboardAvoidingView
+            keyboardVerticalOffset={0}
+          >
+            <BoxButtons>
+              <ButtonCustom 
+                label="Cancelar" 
+                color="#FFF" 
+                onAction={onClose}
+                />
+              <ButtonCustom 
+                label="Salvar" 
+                color="#121212" 
+                bgColor="#04D361" 
+                onAction={saveDate}
+                />
+            </BoxButtons>
+          </KeyboardAvoidingView>
         </Content>
         
         <AlertModal 

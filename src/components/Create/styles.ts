@@ -38,7 +38,7 @@ export const ButtonReveneuExpense = styled.TouchableOpacity<IButtonRE>`
   height: 46px;
   border-radius: 8px;
   background-color: ${({ reveOrExpen }: any) => reveOrExpen ? '#03DAC6' : '#FF7755'};
-  opacity: ${({ check }: any) => check ? 0.6 : 1};
+  opacity: ${({ check }: any) => check ? 0.4 : 1};
 `;
 
 export const Fields = styled.View`
