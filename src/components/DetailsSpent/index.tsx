@@ -1,5 +1,6 @@
 import { Text } from "react-native";
 import { Container, Description, Title } from "./styles";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface DetailsSpentProps {
   title: string;
@@ -12,7 +13,7 @@ export function DetailsSpent({ title, description, icon }: DetailsSpentProps) {
     <Container>
       <Title>
         <Text>{icon}</Text>
-        <Text style={{ fontSize: 24, color:'rgba(255,255,255, .8)' }}>{title}</Text>
+        <Text style={{ fontSize: RFValue(16), color:'#777' }}>{title}</Text>
       </Title>
 
       <Description>{description}</Description>

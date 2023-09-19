@@ -1,17 +1,12 @@
 import { TouchableOpacity } from "react-native";
 import { BtnOp, Container } from "./styled";
 import { useSpent } from "../../context/main";
-import { useEffect } from "react";
 
 
 export function ButtonsTop() {
   const { 
     setOption, 
     option, 
-    spent, 
-    setSpent, 
-    setTotalSpents, 
-    getData 
   } = useSpent();
 
   return (

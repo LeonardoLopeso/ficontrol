@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 
 import { Platform, StatusBar } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 
 const isAndroid = Platform.OS === 'android';
 
@@ -16,6 +17,6 @@ export const Title = styled.View`
 
 export const Description = styled.Text`
   margin-left: 32px;
-  font-size: 18px;
-  color: rgba(255,255,255, .5);
+  font-size: ${RFValue(16)};
+  color: #EEE;
 `;

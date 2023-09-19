@@ -26,6 +26,7 @@ import { Input } from "../Input";
 import { formatCurrency } from "../../utils/helpers";
 import { useSpent } from "../../context/main";
 import { Text } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface ListEntriesProps {
   label: string;
@@ -65,7 +66,12 @@ export function ListEntries({ label }: ListEntriesProps) {
       <Entrie>
         <Title>{label}</Title>
         <TouchableOpacity onPress={() => setIsModalCreateVisible(true)}>
-          <AntDesign name="plus" color='#EEEEEE' size={20}/>
+          <AntDesign 
+            name="plussquare" 
+            color='#EEEEEE' 
+            size={22}
+            style={{ paddingRight:4}}
+          />
         </TouchableOpacity>
       </Entrie>
 
@@ -79,7 +85,7 @@ export function ListEntries({ label }: ListEntriesProps) {
         <TouchableOpacity onPress={() => setSearch('')}>
           <Text style={{ 
             paddingHorizontal: 26,
-            fontSize: 18,
+            fontSize: RFValue(12),
             color: '#ACACAC'
            }}>Limpar</Text>
         </TouchableOpacity>

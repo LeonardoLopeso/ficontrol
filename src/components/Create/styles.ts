@@ -35,8 +35,9 @@ export const ButtonReveneuExpense = styled.TouchableOpacity<IButtonRE>`
   justify-content: center;
   align-items: center;
   flex: 1;
-  height: 46px;
+  padding: 12px 52px;
   border-radius: 8px;
+  border: 1px solid #444;
   background-color: ${({ reveOrExpen }: any) => reveOrExpen ? '#03DAC6' : '#FF7755'};
   opacity: ${({ check }: any) => check ? 0.4 : 1};
 `;
@@ -53,10 +54,11 @@ export const Fields = styled.View`
 
 export const BoxButtons = styled.View`
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-around;
   gap: 32px;
   height: 20%;
-  margin-top: auto;
+  width: 100%;
+  margin-top: 54px;
 `;
 
 export const Button = styled.Button`

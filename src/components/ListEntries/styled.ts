@@ -1,3 +1,4 @@
+import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
 export const Container = styled.View`
@@ -37,7 +38,7 @@ export const Spent = styled.TouchableOpacity`
 
 export const Title = styled.Text`
   color: #fff;
-  font-size: 24px;
+  font-size: ${RFValue(18)};
   padding: 19px 0 17px;
 `;
 
@@ -51,18 +52,19 @@ export const TitleDate = styled.View`
 `;
 
 export const TitleSpent = styled.Text`
-  font-size: 24px;
+  font-size: ${RFValue(16)};
   color: #EEEEEE;
 `;
 
 export const DateHour = styled.Text`
   color: #A7A6A6;
   font-weight: 300;
+  font-size: ${RFValue(10)};
 `;
 
 export const Price = styled.Text`
   color: #EEEEEE;
-  font-size: 28px;
+  font-size: ${RFValue(20)};
   font-weight: 300;
 `;
 

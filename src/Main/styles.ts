@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 import { Platform, StatusBar } from 'react-native';
 
@@ -12,7 +13,7 @@ export const Container = styled.View`
 
 export const MonthText = styled.Text`
   color: #ACACAC;
-  font-size: 18px;
+  font-size: ${RFValue(14)};
   margin: 19px auto 26px;
 `;
 
@@ -26,5 +27,5 @@ export const LabelTotal = styled.Text`
 
 export const ValueTotal = styled.Text`
   color: #EEEEEE;
-  font-size: 46px;
+  font-size: ${RFValue(32)};
 `;

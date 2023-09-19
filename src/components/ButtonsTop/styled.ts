@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
   height: 46px;
@@ -13,11 +14,10 @@ export const Container = styled.View`
 `;
 
 export const BtnOp = styled.Text`
-  
-  font-size: 20px;
+  font-size: ${RFValue(14)};
   height: 36px;
-  padding: 0 10px;
-  line-height: 36px;
+  padding: 5px 10px;
+  /* line-height: 32px; */
   border-radius: 16px;
   color: ${({ isSelected }: any) => (isSelected ? "#262626" : "#fff")};
   background-color: ${({ isSelected }: any) => (isSelected ? "#04D361" : "transparent")};

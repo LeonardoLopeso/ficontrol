@@ -1,8 +1,9 @@
 import { Modal } from 'react-native';
-import { BoxClose, BoxContent, ButtonAction, Container, Overlayer } from './styles';
+import { BoxButtonModal, BoxClose, BoxContent, ButtonAction, Container, Overlayer } from './styles';
 
 import { AntDesign } from '@expo/vector-icons';
 import { Text } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 interface IAlertModal {
   isOk: boolean;
@@ -37,7 +38,7 @@ export const AlertModal = ({
             <AntDesign 
               name="closesquare" 
               size={26} 
-              color="#777" 
+              color="#ACACAC" 
               onPress={onClose}
             />
           </BoxClose>
@@ -47,18 +48,26 @@ export const AlertModal = ({
                 name={isOk ? "checkcircleo" : "infocirlceo"} 
                 size={84}  
                 color={isOk ? "#04D361" : "#FF7755"} 
+                style={{
+                  opacity: .8
+                }}
               />
               <Text style={{ 
-                fontSize: 20, 
+                fontSize: RFValue(16), 
                 color: '#EEEEEE',
-                maxWidth: 200,
+                maxWidth: 250,
                 textAlign: 'center'
               }}>{label}</Text>
               
           {btnAction &&
-            <ButtonAction onPress={funcAction}>
-              <Text>{textBtnAction}</Text>
-            </ButtonAction>
+            <BoxButtonModal>
+              <ButtonAction onPress={onClose}>
+                <Text style={{ color: '#FF7755' }}>Cancelar</Text>
+              </ButtonAction>
+              <ButtonAction onPress={funcAction} bgColor>
+                <Text>{textBtnAction}</Text>
+              </ButtonAction>
+            </BoxButtonModal>
           }
           </BoxContent>
 

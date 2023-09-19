@@ -26,15 +26,24 @@ export const BoxContent = styled.View`
   gap: 12px;
 `;
 
+export const BoxButtonModal = styled.View`
+  flex-direction: row;
+  gap: 16px;
+`;
+
 export const BoxClose = styled.TouchableOpacity`
   align-items: flex-end;
   padding-right: 5px;
 `;
 
-export const ButtonAction = styled.TouchableOpacity`
-  border: 1px solid #444;
-  padding: 12px 42px;
+interface IPropsTouchableOp {
+  bgColor?: boolean;
+}
+
+export const ButtonAction = styled.TouchableOpacity<IPropsTouchableOp>`
+  border: 1px solid ${({ bgColor }: any) => bgColor ? '#444' : 'transparent'};
+  padding: 12px 32px;
   border-radius: 4px;
-  margin-top: 16px;
-  background-color: #03DAC6;
+  margin-top: 22px;
+  background-color: ${({ bgColor }: any) => bgColor ? '#03DAC6' : 'transparent'};
 `;

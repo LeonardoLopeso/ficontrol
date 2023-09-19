@@ -19,6 +19,7 @@ import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { formatCurrency, removeLastLetter } from "../../utils/helpers";
 import { AlertModal } from "../AlertModal";
 import { useSpent } from "../../context/main";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface SpentProps {
   visible: boolean;
@@ -58,7 +59,7 @@ export function SpentModal({ visible, onClose, spent }: SpentProps) {
         <BtnClose onPress={onClose}>
           <AntDesign 
             name="closesquare" 
-            color='#383838' 
+            color='#ACACAC' 
             size={20}
           />
         </BtnClose>
@@ -67,7 +68,7 @@ export function SpentModal({ visible, onClose, spent }: SpentProps) {
 
           <SpentLabel>
             <LabelDesc>Despesa: </LabelDesc>
-            <Text style={{ color:'#FFF', fontSize: 38 }}>{spent.title}</Text>
+            <Text style={{ color:'#FFF', fontSize: RFValue(28) }}>{spent.title}</Text>
           </SpentLabel>
           
           <LabelDesc>Total das despesas</LabelDesc>
@@ -75,7 +76,7 @@ export function SpentModal({ visible, onClose, spent }: SpentProps) {
         </TotalPrice>
 
         <BoxDetails>
-          <Text style={{ fontSize: 32, color:'#EEEEEE' }}>Detalhes</Text>
+          <Text style={{ fontSize: RFValue(18), color:'#EEEEEE' }}>Detalhes</Text>
         
           <Details>
             <DetailsSpent 
@@ -95,13 +96,14 @@ export function SpentModal({ visible, onClose, spent }: SpentProps) {
             <Delete onPress={handleDelete}>
               <Text 
                 style={{ 
-                  fontSize:18,  
+                  fontSize:RFValue(12),  
                 }}>Excluir</Text>
             </Delete>
+            
             <Delete isEdit>
               <Text 
                 style={{ 
-                  fontSize:18 
+                  fontSize:RFValue(12),
                 }}>Editar</Text>
             </Delete>
           </BoxDeleteSpent>

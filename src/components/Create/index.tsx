@@ -21,6 +21,7 @@ import { ILancamentos } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSpent } from "../../context/main";
 import { AlertModal } from "../AlertModal";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface CreatProps {
   visible: boolean;
@@ -110,7 +111,7 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
       <Overlay>
         <Content>
           <BoxTop>
-            <Text style={{ fontSize: 26, color:'#eeeeee' }}>Novo lançamento</Text>
+            <Text style={{ fontSize: RFValue(18), color:'#eeeeee' }}>Novo lançamento</Text>
           </BoxTop>
 
           
@@ -119,22 +120,6 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
               A variável plceholder pega o texto do botão de opção do header e por vir
               no plural foi utilizado a func slice para remover o último caractere "s"
             */}
-
-            <RevenueExpense>
-              <ButtonReveneuExpense 
-                reveOrExpen
-                onPress={() => setIsCheck(1)}
-                check={isCheck === 2 && true}
-              >
-                <Text>Receita</Text>
-              </ButtonReveneuExpense>
-              <ButtonReveneuExpense
-                onPress={() => setIsCheck(2)}
-                check={isCheck === 1 && true}
-              >
-                <Text>Despesa</Text>
-              </ButtonReveneuExpense>
-            </RevenueExpense>
 
             <Input 
               placeholder="Título do lançamento" 
@@ -150,6 +135,21 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
             <DateInput 
               onChange={setDate}
             />
+            <RevenueExpense>
+              <ButtonReveneuExpense 
+                reveOrExpen
+                onPress={() => setIsCheck(1)}
+                check={isCheck === 2 && true}
+              >
+                <Text style={{ fontSize: RFValue(11) }}>Receita</Text>
+              </ButtonReveneuExpense>
+              <ButtonReveneuExpense
+                onPress={() => setIsCheck(2)}
+                check={isCheck === 1 && true}
+              >
+                <Text style={{ fontSize: RFValue(11) }}>Despesa</Text>
+              </ButtonReveneuExpense>
+            </RevenueExpense>
             <Input 
               placeholder="Descrição" 
               border 
@@ -158,9 +158,10 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
             />
           </Fields>
 
-          <TextImport>
+          {/* <TextImport>
             <Text style={{
               color: "#ACACAC",
+              fontSize: RFValue(10)
             }}>
               Se preferir, importe um arquivo CSV &nbsp;
               <MaterialCommunityIcons 
@@ -171,11 +172,11 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
             <TouchableOpacity>
               <Text style={{
                 color: '#EEEEEE',
-                fontSize: 18,
+                fontSize: RFValue(14),
                 marginTop: 8
               }}>Importar</Text>
             </TouchableOpacity>
-          </TextImport>
+          </TextImport> */}
 
           <KeyboardAvoidingView
             keyboardVerticalOffset={0}

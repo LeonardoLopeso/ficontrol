@@ -1,3 +1,4 @@
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -10,4 +11,5 @@ export const Container = styled.View`
 export const UserName = styled.Text`
   margin-left: 10px;
   color: #fff;
+  font-size: ${RFValue(12)}
 `;

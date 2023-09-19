@@ -1,4 +1,5 @@
 import { TextInput } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface InputProps {
   placeholder: string;
@@ -28,7 +29,7 @@ export function Input({
     borderRadius: 8,
     paddingLeft: 8,
     paddingTop: isTextArea ? 16 : 0,
-    fontSize: 16,
+    fontSize: RFValue(11),
     color: '#FFF',
     ...styles
   }

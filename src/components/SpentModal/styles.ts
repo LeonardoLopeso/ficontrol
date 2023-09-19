@@ -1,3 +1,4 @@
+import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -22,12 +23,13 @@ export const TotalPrice = styled.View`
 `;
 
 export const LabelDesc = styled.Text`
-  color: #ACACAC;
+  color: #777;
+  font-size: ${RFValue(12)};
 `;
 
 export const LabelPrice = styled.Text`
   color: #EEEEEE;
-  font-size: 42px;
+  font-size: ${RFValue(32)};
 `;
 
 export const BoxDetails = styled.View`
@@ -42,7 +44,7 @@ export const BoxDetails = styled.View`
 export const BoxDeleteSpent = styled.View`
   flex: 1;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-around;
   align-items: flex-end;
   gap: 12px;
   padding-bottom: 86px;
@@ -53,9 +55,11 @@ interface ITouchableProps {
 }
 
 export const Delete = styled.TouchableOpacity<ITouchableProps>`
-  padding: 12px 52px;
+  justify-content: center;
+  align-items: center;
+  width: 170px;
+  height: 46px;
   border-radius: 4px;
-  border: 1px solid #444;
   background-color: ${({ isEdit }: any) => isEdit ? '#03DAC6' : '#FF7755'};
   opacity: ${({ isEdit }: any) => isEdit ? '.4' : '1'};
 `;
