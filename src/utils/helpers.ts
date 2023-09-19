@@ -26,3 +26,11 @@ export const formatCurrency = (value: number) => {
 export const removeLastLetter = (letter: string) => {
   return letter.toString().slice(0, -1);
 }
+
+export const addingEllipsis = (str: string, maxLenght: number) => {
+  if (str.length > maxLenght) {
+    return str.slice(0, maxLenght) + '...'; // Adiciona reticências
+  } else {
+    return str; // A string já está dentro do limite
+  }
+}

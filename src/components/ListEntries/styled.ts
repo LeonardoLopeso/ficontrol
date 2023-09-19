@@ -22,7 +22,7 @@ export const InputSearch = styled.View`
 `;
 
 export const SpentVoid = styled.View`
-  margin-top: 64px;
+  margin-top: 42px;
   gap: 16px;
 `;
 

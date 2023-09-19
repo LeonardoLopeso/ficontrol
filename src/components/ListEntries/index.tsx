@@ -23,7 +23,7 @@ import { ILancamentos } from "../../types";
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Create } from "../Create";
 import { Input } from "../Input";
-import { formatCurrency } from "../../utils/helpers";
+import { addingEllipsis, formatCurrency } from "../../utils/helpers";
 import { useSpent } from "../../context/main";
 import { Text } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
@@ -37,7 +37,7 @@ export function ListEntries({ label }: ListEntriesProps) {
   const [isModalCreateVisible, setIsModalCreateVisible] = useState(false);
   const [selectedSpent, setSelectedSpent] = useState<null | ILancamentos>(null);
   const [spentFiltered, setSpentFiltered] = useState<ILancamentos[]>([]);
-  const { setSearch, spent, option, setTotalSpents, search, setSpent } = useSpent();
+  const { setSearch, spent, option, setTotalSpents, search } = useSpent();
 
   function handleOpenModal(spent: ILancamentos) {
     setIsModalVisible(true);
@@ -55,7 +55,10 @@ export function ListEntries({ label }: ListEntriesProps) {
     
     if(search) {
       setSpentFiltered(dataFiltered.filter(data => {
-        return data.title.includes(search)
+        return data.title.includes(search) || 
+                data.description.includes(search) || 
+                data.data.includes(search) || 
+                data.valor.toString().includes(search)
       }));
     }
 
@@ -68,7 +71,7 @@ export function ListEntries({ label }: ListEntriesProps) {
         <TouchableOpacity onPress={() => setIsModalCreateVisible(true)}>
           <AntDesign 
             name="plussquare" 
-            color='#EEEEEE' 
+            color='#ACACAC' 
             size={22}
             style={{ paddingRight:4}}
           />
@@ -77,20 +80,20 @@ export function ListEntries({ label }: ListEntriesProps) {
 
       <InputSearch>
         <Input 
-          placeholder="Pesquisar" 
+          placeholder="Título, descrição, valor ou data" 
           onChange={setSearch} 
           styles={{ flex: 1 }} 
           value={search}
         />
         <TouchableOpacity onPress={() => setSearch('')}>
           <Text style={{ 
-            paddingHorizontal: 26,
+            paddingHorizontal: 20,
             fontSize: RFValue(12),
             color: '#ACACAC'
-           }}>Limpar</Text>
+           }}><MaterialCommunityIcons name="broom" size={18} /> Limpar</Text>
         </TouchableOpacity>
       </InputSearch>
-      
+
       {spentFiltered.length > 0 &&
         <FlatList 
           showsVerticalScrollIndicator={false}
@@ -104,7 +107,7 @@ export function ListEntries({ label }: ListEntriesProps) {
                   {spent.iconArrowUpOrdown ? <ArrowDown /> : <ArrowUp />}
 
                   <TitleDate>
-                    <TitleSpent>{spent.title}</TitleSpent>
+                    <TitleSpent>{addingEllipsis(spent.title, 16)}</TitleSpent>
                     <DateHour>{spent.data}</DateHour>
                   </TitleDate>
                 </IconTitle>
@@ -121,7 +124,7 @@ export function ListEntries({ label }: ListEntriesProps) {
             style={{
               color:'#ACACAC',
               textAlign: 'center',
-              fontSize: 24
+              fontSize: RFValue(20)
             }}
           >Sem lançamentos</Text>
 
@@ -129,7 +132,7 @@ export function ListEntries({ label }: ListEntriesProps) {
             style={{
               color:'#777',
               textAlign:'center',
-              lineHeight: 20
+              lineHeight: RFValue(18)
             }}
           >
             Comece a trilhar o caminho para o controle total de suas finanças hoje mesmo! Adicione suas receitas e despesas agora e assuma o comando de seu futuro financeiro.
@@ -138,7 +141,7 @@ export function ListEntries({ label }: ListEntriesProps) {
           <BoxImage>
             <MaterialCommunityIcons 
               name="finance" 
-              size={180} 
+              size={150} 
               color="#383838"
             />
           </BoxImage>
