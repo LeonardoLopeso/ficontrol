@@ -5,13 +5,15 @@ import { Container, Label } from "./styles";
   bgColor?: string;
   color: string;
   onAction?: () => void;
+  styles?: {};
  }
 
-export function ButtonCustom({ label, bgColor, color, onAction }: ButtonProps) {
+export function ButtonCustom({ label, bgColor, color, onAction, styles }: ButtonProps) {
   return (
     <Container onPress={onAction}
       style={{
-        backgroundColor: bgColor ? bgColor : 'transparent'
+        backgroundColor: bgColor ? bgColor : 'transparent',
+        ...styles
       }}
     >
       <Label style={{

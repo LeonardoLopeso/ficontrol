@@ -9,13 +9,19 @@ import {
   BoxButtons, 
   TextImport, 
   RevenueExpense, 
-  ButtonReveneuExpense 
+  ButtonReveneuExpense, 
+  InpuSelect,
+  ContentSelectModal,
+  OverlaySelectModal,
+  LineOption,
+  LineDivisor,
+  ButtonsSelectModal
 } from "./styles";
 
 import { Input } from "../Input";
 import { ButtonCustom } from "../ButtonCustom";
 
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome, AntDesign } from '@expo/vector-icons';
 import DateInput from "../DateInput";
 import { ILancamentos } from "../../types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -30,16 +36,23 @@ interface CreatProps {
 }
 
 export function Create({ onClose, visible, plceholder }: CreatProps) {
-  const { getData } = useSpent();
+  const { getData, option } = useSpent();
   const [lancamento, setLancamento] = useState<string>('');
   const [value, setValue] = useState<number | null>(null);
   const [date, setDate] = useState<string | null>(null);
   const [desc, setDesc] = useState<string | null>(null);
   const [isCheck, setIsCheck] = useState(0);
 
+  const [selectModal, setSelectModal] = useState<boolean>(false);
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [msgAlert, setMsgAlert] = useState<string>("");
   const [alertOk, setAlertOk] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsCheck(() => {
+      return option === 'Lançamentos' ? 1 : option === 'Receitas' ? 1 : 2
+    })
+  },[option])
 
   const saveDate = useCallback(async () => {
     if (!lancamento || !value || !date || !desc || isCheck === 0) {
@@ -132,10 +145,26 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
               border
               onChange={setValue}
             />
+
+            <InpuSelect
+              onPress={() => setSelectModal(true)}
+            >
+              <Text style={{ color: isCheck ? '#EEE' : '#777' }}>
+                {isCheck === 1 ? 'Receita' : 'Despesa'}
+              </Text>
+
+              <FontAwesome 
+                name="caret-down" 
+                color="#777" 
+                size={22} 
+              />
+            </InpuSelect>
+
             <DateInput 
               onChange={setDate}
             />
-            <RevenueExpense>
+            
+            {/* <RevenueExpense>
               <ButtonReveneuExpense 
                 reveOrExpen
                 onPress={() => setIsCheck(1)}
@@ -149,7 +178,8 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
               >
                 <Text style={{ fontSize: RFValue(11) }}>Despesa</Text>
               </ButtonReveneuExpense>
-            </RevenueExpense>
+            </RevenueExpense> */}
+
             <Input 
               placeholder="Descrição" 
               border 
@@ -158,25 +188,6 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
             />
           </Fields>
 
-          {/* <TextImport>
-            <Text style={{
-              color: "#ACACAC",
-              fontSize: RFValue(10)
-            }}>
-              Se preferir, importe um arquivo CSV &nbsp;
-              <MaterialCommunityIcons 
-                name="information-outline" 
-                size={16} 
-              />
-            </Text>
-            <TouchableOpacity>
-              <Text style={{
-                color: '#EEEEEE',
-                fontSize: RFValue(14),
-                marginTop: 8
-              }}>Importar</Text>
-            </TouchableOpacity>
-          </TextImport> */}
 
           <KeyboardAvoidingView
             keyboardVerticalOffset={0}
@@ -203,6 +214,62 @@ export function Create({ onClose, visible, plceholder }: CreatProps) {
           label={msgAlert}
           onClose={() => setIsOpenModal(false)}
         />
+
+        <Modal
+          transparent
+          visible={selectModal}
+          onRequestClose={onClose}
+          animationType='slide'
+        >
+          <OverlaySelectModal 
+            onPress={() => setSelectModal(false)}
+          >
+            <ContentSelectModal>
+              <LineOption onPress={() => setIsCheck(1)}>
+                <Text 
+                  style={{ 
+                    color:'#EEE', 
+                    fontSize: RFValue(16),
+                  }}>Receita</Text>
+                <AntDesign 
+                  name="checksquare" 
+                  size={24} 
+                  color={isCheck === 1 ? '#04D361' : '#777'}
+                />
+              </LineOption>
+              <LineDivisor />
+              <LineOption onPress={() => setIsCheck(2)}>
+                <Text 
+                  style={{ 
+                    color:'#EEE', 
+                    fontSize: RFValue(16),
+                  }}>Despesas</Text>
+
+                <AntDesign 
+                  name="checksquare" 
+                  size={24} 
+                  color={isCheck === 2 ? '#04D361' : '#777'}
+                />
+              </LineOption>
+                
+
+              <ButtonsSelectModal>
+                {/* <ButtonCustom 
+                  label="Cancelar" 
+                  color="#EEE" 
+                  bgColor="#FF7755"
+                  onAction={() => setSelectModal(false)}
+                /> */}
+                <ButtonCustom 
+                  label="Selecionar" 
+                  color="#EEE" 
+                  bgColor="#03DAC6"
+                  onAction={() => setSelectModal(false)}
+                />
+              </ButtonsSelectModal>
+            </ContentSelectModal>
+          </OverlaySelectModal>
+        </Modal>
       </Overlay>
     </Modal>
   )

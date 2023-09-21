@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Overlay = styled.View`
   flex: 1;
-  background-color: rgba(0,0,0, .4);
+  background-color: rgba(0,0,0, .2);
 `;
 
 export const Content = styled.View`
@@ -18,6 +18,53 @@ export const Content = styled.View`
 export const BoxTop = styled.View`
   align-items: center;
   padding-top: 24px;
+`;
+
+export const InpuSelect = styled.TouchableOpacity`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 52px;
+  background-color: rgba(0,0,0, .5);
+  border-width: 1px;
+  border-color: #A7A6A6;
+  border-radius: 8px;
+  padding: 0 8px;
+  color: #FFF;
+`;
+
+export const OverlaySelectModal = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0, .7);
+`;
+
+export const ContentSelectModal = styled.View`
+  justify-content: space-around;
+  width: 88%;
+  height: 220px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #383838;
+`;
+
+export const LineDivisor = styled.View`
+  border: .2px solid rgba(255,255,255, .3);
+`;
+
+export const LineOption = styled.TouchableOpacity`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ButtonsSelectModal = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
 `;
 
 export const RevenueExpense = styled.View`

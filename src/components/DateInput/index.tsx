@@ -64,6 +64,14 @@ const DateInput = ({ onChange }: IDateInput) => {
             style={{
               borderRadius:8
             }}
+            theme={{
+              calendarBackground:'#383838',
+              dayTextColor: '#ACACAC',
+              textDisabledColor: '#777',
+              monthTextColor:'#FF7755',
+              todayTextColor:'#FF7755',
+              arrowColor:'#FF7755'
+            }}
             onDayPress={day => {
               setSelected(formatarDateBr(day.dateString));
               setIsOpen(false)

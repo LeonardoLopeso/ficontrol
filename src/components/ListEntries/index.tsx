@@ -33,11 +33,12 @@ interface ListEntriesProps {
 }
 
 export function ListEntries({ label }: ListEntriesProps) {
+  const { setSearch, spent, option, setTotalSpents, search } = useSpent();
+  
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalCreateVisible, setIsModalCreateVisible] = useState(false);
   const [selectedSpent, setSelectedSpent] = useState<null | ILancamentos>(null);
   const [spentFiltered, setSpentFiltered] = useState<ILancamentos[]>([]);
-  const { setSearch, spent, option, setTotalSpents, search } = useSpent();
 
   function handleOpenModal(spent: ILancamentos) {
     setIsModalVisible(true);
@@ -54,12 +55,14 @@ export function ListEntries({ label }: ListEntriesProps) {
     setTotalSpents(total);
     
     if(search) {
-      setSpentFiltered(dataFiltered.filter(data => {
+      const filtered = dataFiltered.filter(data => {
         return data.title.includes(search) || 
                 data.description.includes(search) || 
                 data.data.includes(search) || 
                 data.valor.toString().includes(search)
-      }));
+      })
+      setSpentFiltered(filtered);
+      setTotalSpents(filtered.reduce((sum, spent) => sum + Number(spent.valor), 0))
     }
 
   },[option, spent, search])
@@ -67,7 +70,7 @@ export function ListEntries({ label }: ListEntriesProps) {
   return(
     <Container>
       <Entrie>
-        <Title>{label}</Title>
+        <Title>{label} ({spentFiltered.length})</Title>
         <TouchableOpacity onPress={() => setIsModalCreateVisible(true)}>
           <AntDesign 
             name="plussquare" 

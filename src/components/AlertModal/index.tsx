@@ -30,7 +30,7 @@ export const AlertModal = ({
       transparent
       visible={visible}
       onRequestClose={onClose}
-      animationType='slide'      
+      animationType='slide'
     >
       <Overlayer>
         <Container>
