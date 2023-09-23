@@ -14,6 +14,8 @@ import { BoxImage, Container,
   TitleSpent 
 } from "./styled";
 
+import { MotiView } from 'moti'
+
 import { ArrowUp } from "../Icons/ArrowUP";
 import { ArrowDown } from "../Icons/ArrowDown";
 import { SpentModal } from "../SpentModal";
@@ -50,14 +52,18 @@ export function ListEntries({ label }: ListEntriesProps) {
 
     // Valor total dos lançamento, receitas e despesas
     const total = dataFiltered.reduce((sum, spent) => sum + Number(spent.valor), 0);
+
+    const orderedList = [...dataFiltered];
+
+    orderedList.sort((a, n) => (a.data > n.data) ? -1 : (n.data > a.data) ? 1 : 0);
     
-    setSpentFiltered(dataFiltered)
+    setSpentFiltered(orderedList)
     setTotalSpents(total);
     
     if(search) {
       const filtered = dataFiltered.filter(data => {
-        return data.title.includes(search) || 
-                data.description.includes(search) || 
+        return data.title.toLowerCase().includes(search.toLowerCase()) || 
+                data.description.toLowerCase().includes(search.toLowerCase()) || 
                 data.data.includes(search) || 
                 data.valor.toString().includes(search)
       })
@@ -65,7 +71,9 @@ export function ListEntries({ label }: ListEntriesProps) {
       setTotalSpents(filtered.reduce((sum, spent) => sum + Number(spent.valor), 0))
     }
 
-  },[option, spent, search])
+  },[option, spent, search]);
+
+
 
   return(
     <Container>
@@ -104,8 +112,13 @@ export function ListEntries({ label }: ListEntriesProps) {
           keyExtractor={spent => spent.id.toString()}
           ItemSeparatorComponent={Separator}
           style={{marginTop: 16}}
-          renderItem={({ item: spent }) => (
-            <Spent onPress={() => handleOpenModal(spent)}>
+          renderItem={({ item: spent, index }) => (
+            <MotiView
+              from={{ opacity: 0, translateX: 100 }}
+              animate={{ opacity: 1, translateX: 0 }}
+              transition={{ type: 'timing', duration: 100, delay: index * 100 }}
+            >
+              <Spent onPress={() => handleOpenModal(spent)}>
                 <IconTitle>
                   {spent.iconArrowUpOrdown ? <ArrowDown /> : <ArrowUp />}
 
@@ -117,7 +130,8 @@ export function ListEntries({ label }: ListEntriesProps) {
 
                 <Price>{formatCurrency(spent.valor)}</Price>
               </Spent>
-            )}
+            </MotiView>
+          )}
         />
       }
 
